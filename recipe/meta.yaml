@@ -6,18 +6,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-boardgame-maker-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-boardgame-maker-{{ version }}.tar.gz
   sha256: cb05a9254705ac752a73a5f247dbfc92d7817415ac6b9609ded1e781b5f03bf9
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
     - setuptools >=42.0.0
     - wheel
   run:
@@ -28,7 +28,7 @@ requirements:
     - napari-stl-exporter
     - napari-tools-menu
     - numpy
-    - python >=3.8
+    - python >={{ python_min }}
     - qtpy
     - scikit-image  # Not declared, but used
     - scipy  # Not declared, but used
@@ -43,6 +43,7 @@ test:
   requires:
     - pip
     - pyqt
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/napari-boardgame-maker
